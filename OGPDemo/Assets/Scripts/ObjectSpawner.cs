@@ -3,38 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
+// Example script for spawning a network object
 public class ObjectSpawner : NetworkBehaviour
 {
-    [SerializeField] private GameObject spawnPrefab;
+    [SerializeField] private GameObject spawnPrefab; // The prefab we want to spawn
 
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
-
+    // This is script automatically spawns a spawnPrefab into the online session when the object that has the ObjectSpawner script component is spawned into the session
     public override void OnNetworkSpawn()
     {
+        // Only the server is allowed to spawn objects
         if (IsServer)
         {
             SpawnObject();
         }
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
     private void SpawnObject()
     {
+        // Only the server is allowed to spawn objects
         if (IsServer)
         {
-            GameObject go = Instantiate(spawnPrefab);
-            NetworkObject no = go.GetComponent<NetworkObject>();
-            no.Spawn();
+            GameObject go = Instantiate(spawnPrefab); // Instantiate the player prefab locally on the server
+            NetworkObject no = go.GetComponent<NetworkObject>(); // Get a reference to the instantiated objects NetworkObject component 
+            no.Spawn(); // Spawn the object into the online session as an object owned by the server
         }
     }
 }

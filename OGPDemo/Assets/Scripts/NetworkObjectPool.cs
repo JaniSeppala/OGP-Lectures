@@ -1,3 +1,6 @@
+// This object pool is taken directly from the Unity Documentation: https://docs-multiplayer.unity3d.com/docs/advanced-topics/object-pooling/index.html. I made no changes here.
+// -Jani
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
