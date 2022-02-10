@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 3272805660807313365}
   - component: {fileID: 5054905950913856843}
   - component: {fileID: 7996414227771075985}
-  - component: {fileID: 3912911232327291380}
+  - component: {fileID: 2960920674035721360}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  characterController: {fileID: 2960920674035721360}
 --- !u!114 &7996414227771075985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +289,8 @@ MonoBehaviour:
   InLocalSpace: 1
   Interpolate: 1
   CanCommitToTransform: 0
---- !u!136 &3912911232327291380
-CapsuleCollider:
+--- !u!143 &2960920674035721360
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -298,9 +299,13 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  serializedVersion: 2
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3272805661606634963
 GameObject:

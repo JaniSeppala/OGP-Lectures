@@ -8,6 +8,14 @@ public class PlayerMove : NetworkBehaviour // Inheriting from NetworkBehaviour g
     // Variable for determining how fast the player is moving. The [SerializeField] attribute will show the private variable inside the script component
     // in the editor. This allows us to change the value of the variable from the Unity editor
     [SerializeField] private float movementSpeed = 5; // Meters/second
+    [SerializeField] private CharacterController characterController; // Reference to the character controller component that is moved with this script
+
+    /*
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+    }
+    */
 
     // Update is called once per frame
     void Update()
@@ -39,9 +47,18 @@ public class PlayerMove : NetworkBehaviour // Inheriting from NetworkBehaviour g
             // Rotate the GameObject towards the position the GameObject is going to be moved
             transform.LookAt(transform.position + movementDirection);
 
-            // Move the GameObject towards the movement direction. Distance is determined by multiplying the direction by
-            // delta time(amount of time that has elapsed) since the last update loop and by movementSpeed
-            transform.localPosition += movementDirection * Time.deltaTime * movementSpeed;
+            /*
+             * This is the original movement script used during Demo 3. This controls the transform directly.
+             * 
+                // Move the GameObject towards the movement direction. Distance is determined by multiplying the direction by
+                // delta time(amount of time that has elapsed) since the last update loop and by movementSpeed
+                transform.localPosition += movementDirection * Time.deltaTime * movementSpeed
+            */
+
+            // Move the GameObject towards the movement direction by using the character controller component. Distance is determined by multiplying the direction by
+            characterController.Move(movementDirection * Time.deltaTime * movementSpeed);
+
         }
+
     }
 }
