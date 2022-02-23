@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode; // We need to use the Unity.Netcode namespace to access the NetworkManager class
+using UnityEngine.SceneManagement; // We need UnityEngine.SceneManagement to access SceneManager
 
 // This class handles connecting and disconnecting
 public class NetworkButtonController : MonoBehaviour
@@ -31,6 +32,7 @@ public class NetworkButtonController : MonoBehaviour
         {
             disconnectUI.SetActive(false);
             connectUI.SetActive(true);
+            SceneManager.LoadScene(0); // Reset the scene
         }
     }
 
@@ -64,6 +66,7 @@ public class NetworkButtonController : MonoBehaviour
         disconnectUI.SetActive(false);
         connectUI.SetActive(true);
         NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene(0); // Reset the scene
     }
 #endif
 }

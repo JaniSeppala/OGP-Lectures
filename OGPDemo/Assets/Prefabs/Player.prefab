@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 5054905950913856843}
   - component: {fileID: 7996414227771075985}
   - component: {fileID: 2960920674035721360}
+  - component: {fileID: 3856179411796995971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -260,8 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71032f36e6d7b29419258ece58e53855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed:
+    m_InternalValue: 5
   characterController: {fileID: 2960920674035721360}
+  speedBoostLength: 1
+  meshRenderer: {fileID: 3272805661606634960}
 --- !u!114 &7996414227771075985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +310,20 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &3856179411796995971
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272805660807313366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3272805661606634963
 GameObject:
@@ -368,7 +386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9ccc312eadd611248b4b149e70df2325, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
