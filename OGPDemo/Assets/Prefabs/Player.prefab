@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 2960920674035721360}
   - component: {fileID: 3856179411796995971}
   - component: {fileID: 5161868292536983625}
+  - component: {fileID: -5793717820585536918}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -293,7 +294,7 @@ MonoBehaviour:
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 1
-  Interpolate: 1
+  Interpolate: 0
   CanCommitToTransform: 0
 --- !u!143 &2960920674035721360
 CharacterController:
@@ -340,6 +341,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 979140603163001613}
+--- !u!114 &-5793717820585536918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272805660807313366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8838f2ce54bad4fa4a93c0dace26d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3272805661606634963
 GameObject:
   m_ObjectHideFlags: 0

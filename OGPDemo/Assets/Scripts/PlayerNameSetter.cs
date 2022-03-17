@@ -9,6 +9,8 @@ public class PlayerNameSetter : NetworkBehaviour
     [SerializeField] private Text nameText; // Text field for displaying the player name
     Button buttonComponent;
     InputField inputFieldComponent;
+    NetworkVariable<int> health;
+
 
     public override void OnNetworkSpawn()
     {
@@ -30,6 +32,23 @@ public class PlayerNameSetter : NetworkBehaviour
         }
     }
 
+    private void TakeDamage(int damage)
+    {
+        if (IsOwner)
+        {
+            SetHPServerRPC(health.Value - damage);
+        }
+    }
+
+    [ServerRpc]
+    private void SetHPServerRPC(int hp)
+    {
+        health.Value = hp;
+        ClientRpcParams clientparams = new ClientRpcParams();
+        clientparams.Send.TargetClientIds = new ulong[] { 1, 2, 3 };
+        PlayTakeDamageAnimationClientRPC(clientparams);
+    }
+
     [ServerRpc] // This is required for each ServerRPC. Also all ServerRPC method names must end with ServerRPC
     private void SetNameServerRPC(string message) // RPC For sending the name from the client to the server
     {
@@ -40,5 +59,11 @@ public class PlayerNameSetter : NetworkBehaviour
     private void SetNameClientRPC(string message) // RPC for setting the new name sent by the server
     {
         nameText.text = message;
+    }
+
+    [ClientRpc]
+    private void PlayTakeDamageAnimationClientRPC(ClientRpcParams p)
+    {
+        //Play the animation
     }
 }
