@@ -30,8 +30,9 @@ public class NetworkButtonController : MonoBehaviour
         // Only run if we were the client that disconnected
         if (NetworkManager.Singleton.LocalClientId == clientID)
         {
-            disconnectUI.SetActive(false);
-            connectUI.SetActive(true);
+            // I commented out these two lines since the Main Menu UI management is no longer needed
+            //disconnectUI.SetActive(false);
+            //connectUI.SetActive(true);
             SceneManager.LoadScene(0); // Reset the scene
         }
     }

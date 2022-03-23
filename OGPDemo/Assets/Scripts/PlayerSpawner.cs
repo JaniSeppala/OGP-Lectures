@@ -21,15 +21,29 @@ public class PlayerSpawner : MonoBehaviour
         // Only server is allowed to spawn objects into the online session
         if (NetworkManager.Singleton.IsServer)
         {
+            // Load the Game Scene as soon as the server starts
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+
             // If we started as a host, we also have to spawn a player object for the host
             if (NetworkManager.Singleton.IsHost)
             {
-                GameObject go = Instantiate(playerPrefab); // Instantiate the player prefab locally on the server
-                NetworkObject no = go.GetComponent<NetworkObject>(); // Get a reference to the instantiated objects NetworkObject component 
-                no.SpawnAsPlayerObject(NetworkManager.Singleton.LocalClientId); // Spawn the object into the online session as the player object of the local player (host)
+                // We want to spawn the player character for the host only when the Game Scene has completed loading so we start listening for the OnLoadComplete event
+                NetworkManager.Singleton.SceneManager.OnLoadComplete += OnLoadComplete;
             }
             // Run the OnClientConnectCallback() method each time a client connects the online session. This event is run on the server and on the client that connects
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
+        }
+    }
+
+    // This is run each time a client has finished loading a scene on the server. It is also run on the local client when the local client finishes loading an online scene
+    private void OnLoadComplete(ulong clientId, string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
+    {
+        // When the scene is loaded on the host, spawn the player character for the host
+        if (NetworkManager.Singleton.IsHost && clientId == NetworkManager.Singleton.LocalClientId && sceneName == "GameScene")
+        {
+            GameObject go = Instantiate(playerPrefab); // Instantiate the player prefab locally on the server
+            NetworkObject no = go.GetComponent<NetworkObject>(); // Get a reference to the instantiated objects NetworkObject component 
+            no.SpawnAsPlayerObject(NetworkManager.Singleton.LocalClientId); // Spawn the object into the online session as the player object of the local player (host)
         }
     }
 
